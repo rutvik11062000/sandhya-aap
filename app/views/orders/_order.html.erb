@@ -1,0 +1,14 @@
+<div id="<%= dom_id order %>">
+  <p>
+    <strong>Documents:</strong>
+    <% order.documents.each do |document| %>
+      <div><%= link_to document.filename, document %></div>
+    <% end %>
+  </p>
+
+  <p>
+    <strong>Customer:</strong>
+    <%= order.customer_id %>
+  </p>
+
+</div>

@@ -1,0 +1,44 @@
+<%= form_with(model: customer) do |form| %>
+  <% if customer.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(customer.errors.count, "error") %> prohibited this customer from being saved:</h2>
+
+      <ul>
+      <% customer.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :name, class: 'form-label' %>
+      <%= form.text_field :name, class: 'form-control' %>
+    </div>
+
+  <div class="mb-3">
+    <%= form.label :address, class: 'form-label' %>
+      <%= form.text_field :address, class: 'form-control' %>
+    </div>
+
+  <div class="mb-3">
+    <%= form.label :phone, class: 'form-label' %>
+      <%= form.text_field :phone, class: 'form-control' %>
+    </div>
+
+  <div class="mb-3">
+    <% if customer.persisted? %>
+      <div class="float-end">
+        <%= link_to 'Destroy', customer, method: :delete, class: "text-danger", data: { confirm: 'Are you sure?' } %>
+      </div>
+    <% end %>
+
+    <%= form.submit class: 'btn btn-primary' %>
+
+    <% if customer.persisted? %>
+      <%= link_to "Cancel", customer, class: "btn btn-link" %>
+    <% else %>
+      <%= link_to "Cancel", customers_path, class: "btn btn-link" %>
+    <% end %>
+  </div>
+<% end %>

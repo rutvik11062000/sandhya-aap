@@ -1,0 +1,39 @@
+<%= form_with(model: order) do |form| %>
+  <% if order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+      <ul>
+      <% order.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :documents, class: 'form-label' %>
+    <%= form.file_field :documents, multiple: true, class: 'form-control' %>
+    </div>
+
+  <div class="mb-3">
+    <%= form.label :customer_id, class: 'form-label' %>
+      <%= form.text_field :customer_id, class: 'form-control' %>
+    </div>
+
+  <div class="mb-3">
+    <% if order.persisted? %>
+      <div class="float-end">
+        <%= link_to 'Destroy', order, method: :delete, class: "text-danger", data: { confirm: 'Are you sure?' } %>
+      </div>
+    <% end %>
+
+    <%= form.submit class: 'btn btn-primary' %>
+
+    <% if order.persisted? %>
+      <%= link_to "Cancel", order, class: "btn btn-link" %>
+    <% else %>
+      <%= link_to "Cancel", orders_path, class: "btn btn-link" %>
+    <% end %>
+  </div>
+<% end %>

@@ -10,7 +10,11 @@
 
 <dl class="dl-horizontal">
   <dt>Documents:</dt>
-  <dd><%= @order.documents %></dd>
+  <dd>
+    <% @order.documents.each_with_index do |document, index| %>
+      <%= link_to "document #{index + 1}", document %>
+    <% end %> 
+  </dd>
   <dt>Customer:</dt>
-  <dd><%= @order.customer %></dd>
+  <dd><%= link_to @order.customer, @order.customer %></dd>
 </dl>

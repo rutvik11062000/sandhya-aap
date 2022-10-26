@@ -18,26 +18,28 @@
     <thead>
       <tr>
     
-
+            <th>Sr. No.</th>
             <th>Documents</th>
             <th>Customer</th>
-            
+            <th>Created At</th>
           <th></th>
         
       </tr>
     </thead>
 
     <tbody>
-      <% @orders.each do |order| %>
+      <% @orders.each_with_index do |order, index| %>
         <%= content_tag :tr, id: dom_id(order), class: dom_class(order) do %>
-          
-
-                      <td><%= order.documents %></td>
-                      <td><%= order.customer %></td>
-          
-          
-            <td><%= link_to 'Show', order %></td>
-          
+          <td>
+            <%= link_to "#{index+1}", order %>
+          </td>
+            <td>
+              <% order.documents.each_with_index do |document, index| %>
+                <%= link_to "document #{index + 1}", document %>
+              <% end %> 
+            </td>
+            <td><%= link_to order.customer %></td>
+            <td><%= order.created_at.in_time_zone("Mumbai") %></td>
         <% end %>
       <% end %>
     </tbody>

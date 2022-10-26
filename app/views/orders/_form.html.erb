@@ -19,7 +19,24 @@
   <div class="mb-3">
     <%= form.label :customer_id, class: 'form-label' %>
       <%= form.text_field :customer_id, class: 'form-control' %>
+  </div>
+
+  <h4> Order Items </h4>
+  <div data-controller="nested-form">
+    <template data-target="nested-form.template">
+      <%= form.fields_for :items, Item.new, child_index: 'NEW_RECORD' do |item| %>
+        <%= render "order_item_fields", f: item %>
+      <% end %>
+    </template>
+
+    <%= form.fields_for :items do |task| %>
+      <%= render "order_item_fields", f: task %>
+    <% end %>
+
+    <div class="mb-3" data-target="nested-form.links">
+      <%= link_to "Add Item", "#", class: "btn btn-outline-primary", data: { action: "click->nested-form#add_association" } %>
     </div>
+  </div>
 
   <div class="mb-3">
     <% if order.persisted? %>

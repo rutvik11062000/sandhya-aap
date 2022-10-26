@@ -1,5 +1,6 @@
 # Below are the routes for madmin
 namespace :madmin do
+  resources :items
   resources :orders
   resources :customers
   namespace :active_storage do

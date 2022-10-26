@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  order: one
+  unit: 1
+  quantity: 1
+  amount: 1
+  name: MyString
+
+two:
+  order: two
+  unit: 1
+  quantity: 1
+  amount: 1
+  name: MyString

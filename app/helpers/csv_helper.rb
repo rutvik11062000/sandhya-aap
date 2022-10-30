@@ -1,4 +1,4 @@
-require 'CSV'
+require 'csv'
 
 module CsvHelper
   def self.generate_order_csv(orders, options = {})

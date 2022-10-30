@@ -86,3 +86,7 @@ gem "sidekiq", "~> 6.2"
 gem "sitemap_generator", "~> 6.1"
 gem "whenever", require: false
 gem "responders", github: "heartcombo/responders", branch: "main"
+
+gem "will_paginate", "~> 3.3"
+
+gem "receipts", "~> 2.0"

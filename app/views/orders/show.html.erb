@@ -9,6 +9,10 @@
 </div>
 
 <dl class="dl-horizontal">
+  <dt>Download Challan:</dt>
+  <dd><%= link_to "Challan", show_invoice_order_path(@order, format: :pdf) %></dd>
+  <%= render "bill", order: @order %>
+  
   <dt>Documents:</dt>
   <dd>
     <% @order.documents.each_with_index do |document, index| %>
@@ -18,3 +22,24 @@
   <dt>Customer:</dt>
   <dd><%= link_to @order.customer, @order.customer %></dd>
 </dl>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Total Amount</th>
+        <th>Total Advance</th>
+        <th>Balance</th>
+      </tr>
+    </thead>
+
+    <tbody>
+        <%= content_tag :tr, id: dom_id(@order), class: dom_class(@order) do %>
+            <td><%= @order.total_item_amount %></td>
+            <td><%= @order.total_receipt_amount %></td>
+            <td><%= @order.balance %></td>
+        <% end %>
+    </tbody>
+  </table>
+
+<%= render 'receipts/retab', order: @order %>

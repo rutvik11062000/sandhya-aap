@@ -1,0 +1,83 @@
+<h1>Order Items</h1>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Item. No.</th>
+        <th>Created At</th>
+        <th>Type</th>
+        <th>Item Amount</th>
+        
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @order.items.each_with_index do |item, index| %>
+          <%= content_tag :tr, id: dom_id(item), class: dom_class(item) do %>
+            <td>
+              <%= "#{index+1}" %>
+            </td>
+            <td><%= item.created_at.in_time_zone("Mumbai") %></td>
+            <td><%= item.name %></td>
+            <td>Rs. <%= item.amount %></td>
+          <% end %>
+        <% end %>
+    </tbody>
+  </table>
+</div>
+
+<% if @order.receipts.size > 0 && @order.receipts.first.persisted? %>
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>Receipt. No.</th>
+          <th>Created At</th>
+          <th>Method</th>
+          <th>Receipt Amount</th>
+          
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @order.receipts.each_with_index do |receipt, index| %>
+            <% if receipt.persisted? %>
+            <%= content_tag :tr, id: dom_id(receipt), class: dom_class(receipt) do %>
+              <td>
+                <%= "#{index+1}" %>
+              </td>
+              <td><%= receipt.created_at.in_time_zone("Mumbai") %></td>
+              <td><%= receipt.payment_method %></td>
+              <td>Rs. <%= receipt.amount %></td>
+            <% end %>
+          <% end %>
+          <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
+
+
+<dl class="dl-horizontal">
+  <dt>Total Payable:</dt>
+  <h3><dd> Rs. <b><%= @order.balance %> </b></dd></h3>
+</dl>
+
+<div class="card p-3">
+<%= form_for @receipt, url: order_receipts_path(@order) do |f| %>
+  <div class="form-group">
+    <%= f.label :payment_method %>
+    <%= f.select :payment_method, [["Cash", "Cash"], ["UPI", "UPI"], ["Online", "Online"]], class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :amount %>
+    <%= f.number_field :amount, class: 'form-control mt-2 mb-2', style: 'width: 200px;' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit 'Create Receipt', class: 'btn btn-primary' %>
+  </div>
+<% end %>
+</div>

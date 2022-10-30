@@ -1,0 +1,18 @@
+<dl class="dl-horizontal">
+  <dd><%= link_to "Today Order CSV", csv_order_path(format: :csv, today: "true") %></dd>
+  <dd><%= link_to "All Order CSV", csv_order_path(format: :csv) %></dd>
+</dl>
+
+<hr>
+
+<dl class="dl-horizontal">
+  <dd><%= link_to "Today receipt CSV", csv_receipt_path(format: :csv, today: "true") %></dd>
+  <dd><%= link_to "All receipt CSV", csv_receipt_path(format: :csv) %></dd>
+</dl>
+
+<hr>
+
+<dl class="dl-horizontal">
+  <dd><%= link_to "Today bill CSV", csv_bill_path(format: :csv, today: "true") %></dd>
+  <dd><%= link_to "All bill CSV", csv_bill_path(format: :csv) %></dd>
+</dl>

@@ -1,0 +1,12 @@
+<div class="row">
+  <% form_with(model: receipt, action: "create") do |form| %>
+    <div class="col-sm">
+      <%= form.label :payment_method, class: 'form-label' %>
+      <%= form.select :payment_method, [["Cash", "Cash"], ["UPI", "UPI"], ["Online", "Online"]] %>
+    </div>
+    <div class="col-sm">
+      <%= form.label :amount, class: 'form-label' %>
+      <%= form.number_field :amount, class: 'form-control' %>
+    </div>
+  <%end%>
+</div>

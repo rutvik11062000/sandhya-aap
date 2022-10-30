@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-sm">
       <%= f.label "Type : ", class: 'form-label' %>
-      <%= f.collection_select(:name, Product.all, :id, :name, :prompt => 'Select') %>
+      <%= f.collection_select(:name, Product.all, :name, :name, :prompt => 'Select') %>
     </div>
     <div class="col-sm">
       <%= f.label :Unit, class: 'form-label' %>

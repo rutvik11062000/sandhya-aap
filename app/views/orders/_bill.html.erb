@@ -1,0 +1,12 @@
+<%= turbo_frame_tag "bill" do %>
+  <dt>Download Bill:</dt>
+  <dd><%= link_to "Bill", show_bill_order_path(order, format: :pdf), target: "_blank" if order.bill.present? %></dd>
+  <% if !order.bill.present?  %>
+    <%= form_with(url: create_bill_order_path(order), method: "GET", data: { turbo_frame: "bill" }) do |form| %>
+      <div class="input-group mb-3">
+        <button class="btn btn-outline-primary" type="submit">Generate Bill</button>
+      </div>
+    <% end %>
+  <% end %>
+  
+<% end %>

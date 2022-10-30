@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_25_065137) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_29_111051) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -49,6 +49,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_25_065137) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "bills", force: :cascade do |t|
+    t.bigint "order_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_bills_on_order_id"
   end
 
   create_table "customers", force: :cascade do |t|
@@ -100,10 +107,28 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_25_065137) do
     t.index ["customer_id"], name: "index_orders_on_customer_id"
   end
 
+  create_table "payments", force: :cascade do |t|
+    t.bigint "order_id", null: false
+    t.integer "amount"
+    t.string "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_payments_on_order_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "receipts", force: :cascade do |t|
+    t.bigint "order_id", null: false
+    t.integer "amount"
+    t.string "payment_method"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_receipts_on_order_id"
   end
 
   create_table "services", force: :cascade do |t|
@@ -138,7 +163,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_25_065137) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "bills", "orders"
   add_foreign_key "items", "orders"
   add_foreign_key "orders", "customers"
+  add_foreign_key "payments", "orders"
+  add_foreign_key "receipts", "orders"
   add_foreign_key "services", "users"
 end

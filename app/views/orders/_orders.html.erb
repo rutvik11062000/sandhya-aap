@@ -1,0 +1,32 @@
+<%= turbo_frame_tag "orders" do %>
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>Order. No.</th>
+          <th>Created At</th>
+          <th>Customer</th>
+          <th>Total Amount</th>
+          <th>Total Advance</th>
+          <th>Balance</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% orders.each_with_index do |order, index| %>
+          <%= content_tag :tr, id: dom_id(order), class: dom_class(order) do %>
+            <td>
+              <%= link_to order.id, order %>
+            </td>
+              <td><%= order.created_at.in_time_zone("Mumbai") %></td>
+              <td><%= link_to order.customer %></td>
+              <td><%= order.total_item_amount %></td>
+              <td><%= order.total_receipt_amount %></td>
+              <td><%= order.total_item_amount - order.total_receipt_amount %></td>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+    <%= will_paginate orders %>
+  </div>
+<% end %>

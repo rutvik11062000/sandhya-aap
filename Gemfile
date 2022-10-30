@@ -10,7 +10,7 @@ gem "rails", "~> 7.0.4"
 gem "sprockets-rails"
 
 # Use postgresql as the database for Active Record
-gem "pg", "~> 1.1"
+gem "mysql2", "~> 0.5"
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
@@ -90,3 +90,5 @@ gem "responders", github: "heartcombo/responders", branch: "main"
 gem "will_paginate", "~> 3.3"
 
 gem "receipts", "~> 2.0"
+
+gem "appengine", "~> 0.7.0"

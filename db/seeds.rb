@@ -11,4 +11,5 @@
 # Product.create!(name: "Date")
 Product.create!(name: "Bank Dater")
 Product.create!(name: "Self Ink")
+Product.create!(name: "Book Binding")
 Product.create!(name: "Others")

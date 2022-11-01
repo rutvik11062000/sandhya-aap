@@ -1,4 +1,5 @@
 class Order < ApplicationRecord
+  self.per_page = 10
   belongs_to :customer
   has_many_attached :documents, dependent: :destroy
   has_many :items, dependent: :destroy

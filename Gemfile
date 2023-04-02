@@ -92,3 +92,5 @@ gem "will_paginate", "~> 3.3"
 gem "receipts", "~> 2.0"
 
 gem "appengine", "~> 0.7.0"
+
+gem "rake", "~> 13.0"
